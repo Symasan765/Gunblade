@@ -11,7 +11,7 @@
 ProjectSettings/*
 !ProjectSettings/EditorSettings.asset
 
-Assets/*
+
 !Assets/HTC.UnityPlugin/
 !Assets/HTC.UnityPlugin.meta
 Assets/HTC.UnityPlugin/ViveInputUtility/changelog.txt

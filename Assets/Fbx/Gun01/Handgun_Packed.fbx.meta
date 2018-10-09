@@ -1,0 +1,163 @@
+fileFormatVersion: 2
+guid: 066baf45b32dbc14f952eedf112eafdc
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Cube.002
+    100002: Cube.005
+    100004: Gun
+    100006: Gun_trigger
+    100008: //RootNode
+    100010: muzzle fire
+    400000: Cube.002
+    400002: Cube.005
+    400004: Gun
+    400006: Gun_trigger
+    400008: //RootNode
+    400010: muzzle fire
+    2100000: handgun
+    2100002: Fire.001
+    2300000: Cube.002
+    2300002: Cube.005
+    2300004: Gun
+    2300006: Gun_trigger
+    2300008: muzzle fire
+    3300000: Cube.002
+    3300002: Cube.005
+    3300004: Gun
+    3300006: Gun_trigger
+    3300008: muzzle fire
+    4300000: Cube.002
+    4300002: Gun
+    4300004: Cube.005
+    4300006: muzzle fire
+    4300008: Gun_trigger
+    7400000: Cube.002|Cube.001Action
+    7400002: Cube.002|Cube.002Action
+    7400004: Cube.002|Cube.004Action
+    7400006: Cube.002|Gun_trigger
+    7400008: Cube.002|muni_rot
+    7400010: Cube.002|muzzle fire
+    7400012: Cube.002|pistol slide
+    7400014: Gun|Cube.001Action
+    7400016: Gun|Cube.002Action
+    7400018: Gun|Cube.004Action
+    7400020: Gun|Gun_trigger
+    7400022: Gun|muni_rot
+    7400024: Gun|muzzle fire
+    7400026: Gun|pistol slide
+    7400028: Cube.005|Cube.001Action
+    7400030: Cube.005|Cube.002Action
+    7400032: Cube.005|Cube.004Action
+    7400034: Cube.005|Gun_trigger
+    7400036: Cube.005|muni_rot
+    7400038: Cube.005|muzzle fire
+    7400040: Cube.005|pistol slide
+    7400042: muzzle fire|Cube.001Action
+    7400044: muzzle fire|Cube.002Action
+    7400046: muzzle fire|Cube.004Action
+    7400048: muzzle fire|Gun_trigger
+    7400050: muzzle fire|muni_rot
+    7400052: muzzle fire|muzzle fire
+    7400054: muzzle fire|pistol slide
+    7400056: Gun_trigger|Cube.001Action
+    7400058: Gun_trigger|Cube.002Action
+    7400060: Gun_trigger|Cube.004Action
+    7400062: Gun_trigger|Gun_trigger
+    7400064: Gun_trigger|muni_rot
+    7400066: Gun_trigger|muzzle fire
+    7400068: Gun_trigger|pistol slide
+    9500000: //RootNode
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Fire.001
+    second: {fileID: 2100000, guid: 0bd890a1ac8cb814a87caaa5709597b0, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: handgun
+    second: {fileID: 2100000, guid: ef995d4f8a6a6224a9ca618676fc370e, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 0.01
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    rootMotionBoneRotation: {x: 0, y: 0, z: 0, w: 1}
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
