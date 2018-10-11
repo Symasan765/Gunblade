@@ -15,8 +15,9 @@ public class GunState : MonoBehaviour
     public GameObject MagazineObject;
     public GameObject MagazinePoint;
     public GameObject BulletShell;
-    public GameObject BulletPoint;
+    public GameObject BulletShellPoint;
     public GameObject BulletCoreObject;
+    public GameObject BulletCorePoint;
     public float ShellEjectPower = 1.0f;
 
     public bool bShot = false;
@@ -58,21 +59,23 @@ public class GunState : MonoBehaviour
                 }
                 SliderMotionTime = Mathf.Min(1, SliderMotionTime + Time.deltaTime * SliderMotionTimeMultiple);
                 SliderWeight = SliderMotion.Evaluate(SliderMotionTime);
-                if (SliderMotionTime == 1)
-                {
-                    bShot = false;
-                    SliderMotionTime = 0.0f;
-                }
-                if (iBulletLeft == 0)
-                {
-                    SliderWeight = 1.0f;
-                    SliderMotionTime = 0.0f;
-                }
                 if(SliderMotionTime > 0.5f && !bShellEject)
                 {
                     EjectBulletShell();
                     bShellEject = true;
                 }
+                if (SliderMotionTime == 1)
+                {
+                    bShot = false;
+                    SliderMotionTime = 0.0f;
+                }
+
+                if (iBulletLeft == 0)
+                {
+                    SliderWeight = 1.0f;
+                    SliderMotionTime = 0.0f;
+                }
+
             }
         }
 
@@ -111,7 +114,7 @@ public class GunState : MonoBehaviour
 
     private void EjectBulletShell()
     {
-        var go = Instantiate(BulletShell, BulletPoint.transform);
+        var go = Instantiate(BulletShell, BulletShellPoint.transform);
         go.transform.localPosition = Vector3.zero;
         Transform addVec = go.transform;
         addVec.Rotate(Vector3.forward, 300);

@@ -108,7 +108,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4088311503688698}
   m_Layer: 0
-  m_Name: BulletPoint
+  m_Name: BulletShellPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -199,6 +199,21 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1776214694308822
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4447989403201452}
+  m_Layer: 0
+  m_Name: BulletCorePoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1919015514235272
 GameObject:
   m_ObjectHideFlags: 1
@@ -237,7 +252,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1493063541199924}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.493, z: -0.319}
+  m_LocalPosition: {x: 0, y: 0.4962, z: -0.3093}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4505221172631258}
@@ -296,6 +311,19 @@ Transform:
   m_Father: {fileID: 4587034204246106}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!4 &4447989403201452
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1776214694308822}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.4962, z: -0.2373}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4505221172631258}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4505221172631258
 Transform:
   m_ObjectHideFlags: 1
@@ -309,6 +337,7 @@ Transform:
   - {fileID: 4587034204246106}
   - {fileID: 4159999575222766}
   - {fileID: 4088311503688698}
+  - {fileID: 4447989403201452}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -894,8 +923,9 @@ MonoBehaviour:
   MagazinePoint: {fileID: 1644120406544492}
   BulletShell: {fileID: 1505287774534764, guid: 070969c76b877dd42a6c5b95f1a0c489,
     type: 2}
-  BulletPoint: {fileID: 1493063541199924}
+  BulletShellPoint: {fileID: 1493063541199924}
   BulletCoreObject: {fileID: 1925021930293212, guid: 7795cc7740f90134b9e12c064005f52f,
     type: 2}
+  BulletCorePoint: {fileID: 1776214694308822}
   ShellEjectPower: 0.5
   bShot: 0
