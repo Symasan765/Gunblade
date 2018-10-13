@@ -18,7 +18,12 @@ public class GunState : MonoBehaviour
     public GameObject BulletShellPoint;
     public GameObject BulletCoreObject;
     public GameObject BulletCorePoint;
+    [Tooltip("薬莢の排出速度")]
     public float ShellEjectPower = 1.0f;
+    [Tooltip("発破するために必要なトリガーの引き具合")]
+    public float TriggerThreshould = 0.7f;
+    [Tooltip("単 発破")]
+    public bool SingleShot = false;
 
     public bool bShot = false;
 
@@ -31,6 +36,7 @@ public class GunState : MonoBehaviour
     private int iBulletLeft = 0;
     private bool bMagazineExist;
     private bool bShellEject;
+    private bool TriggerPressed = false;
 
     // Use this for initialization
     void Start()
@@ -93,6 +99,7 @@ public class GunState : MonoBehaviour
         Vector3 newTrig = TriggerInit;
         newTrig.x += TriggerWeight * 0.0007f;
         TriggerModel.transform.localPosition = newTrig;
+
     }
 
     private void SliderUpdate()
@@ -121,6 +128,24 @@ public class GunState : MonoBehaviour
 
         go.GetComponent<Rigidbody>().AddForce(addVec.transform.up * ShellEjectPower, ForceMode.Impulse);
         Destroy(go.gameObject, 5.0f);
+    }
+
+    public void SetTriggerWeight(float w)
+    {
+        TriggerWeight = Mathf.Clamp01(w);
+        if (TriggerWeight > TriggerThreshould)
+        {
+            if (!TriggerPressed)
+            {
+                bShot = true;
+                TriggerPressed = true;
+            }
+        }
+        else
+        {
+            bShot = false;
+            TriggerPressed = false;
+        }
     }
 
 
