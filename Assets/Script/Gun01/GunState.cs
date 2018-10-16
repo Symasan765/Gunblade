@@ -26,6 +26,7 @@ public class GunState : MonoBehaviour
     public bool SingleShot = false;
 
     public bool bShot = false;
+    public AudioClip[] clips;
 
 
     //
@@ -37,6 +38,7 @@ public class GunState : MonoBehaviour
     private bool bMagazineExist;
     private bool bShellEject;
     private bool TriggerPressed = false;
+    private AudioSource AudioSourceScript;
 
     // Use this for initialization
     void Start()
@@ -45,6 +47,7 @@ public class GunState : MonoBehaviour
         SliderInit = SliderModel.transform.localPosition;
         iBulletLeft = MagazineObject.GetComponent<Magazine>().GetBulletNum();
         bMagazineExist = true;
+        AudioSourceScript = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -62,6 +65,7 @@ public class GunState : MonoBehaviour
                 {
                     iBulletLeft = Mathf.Max(0, iBulletLeft - 1);    // 残弾消費
                     bShellEject = false;
+                    AudioSourceScript.PlayOneShot(clips[0]);
                 }
                 SliderMotionTime = Mathf.Min(1, SliderMotionTime + Time.deltaTime * SliderMotionTimeMultiple);
                 SliderWeight = SliderMotion.Evaluate(SliderMotionTime);
