@@ -175,6 +175,8 @@ GameObject:
   - component: {fileID: 114844947565471728}
   - component: {fileID: 65678806367251960}
   - component: {fileID: 54245116553174550}
+  - component: {fileID: 82648961355123322}
+  - component: {fileID: 114340897821529076}
   m_Layer: 0
   m_Name: Handgun_Body
   m_TagString: Untagged
@@ -330,8 +332,8 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1719368752115384}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0.49853596, y: -0.08223165, z: 0.03449642, w: 0.86227024}
+  m_LocalPosition: {x: -0.0041634487, y: -0.611, z: -0.434}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4587034204246106}
@@ -340,7 +342,7 @@ Transform:
   - {fileID: 4447989403201452}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 59.931004, y: -12.379001, z: -2.5740001}
 --- !u!4 &4587034204246106
 Transform:
   m_ObjectHideFlags: 1
@@ -859,6 +861,101 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.23495868, y: 1.0180821, z: 0.48013437}
   m_Center: {x: -0.0063206702, y: -0.117534876, z: -0.61253744}
+--- !u!82 &82648961355123322
+AudioSource:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719368752115384}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!114 &114079402404704148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -871,6 +968,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   iBulletMax: 15
+--- !u!114 &114340897821529076
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719368752115384}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f735f69652742834ebe0272214537d6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  manager: {fileID: 0}
+  GunObject: {fileID: 1719368752115384}
 --- !u!114 &114844947565471728
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -928,4 +1038,8 @@ MonoBehaviour:
     type: 2}
   BulletCorePoint: {fileID: 1776214694308822}
   ShellEjectPower: 0.5
+  TriggerThreshould: 0.7
+  SingleShot: 0
   bShot: 0
+  clips:
+  - {fileID: 8300000, guid: b2d159f7e00d44d9bbc2d50a0c4fef59, type: 3}

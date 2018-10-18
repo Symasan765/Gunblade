@@ -1,11 +1,11 @@
-﻿using HTC.UnityPlugin.Vive;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valve.VR;
 
 public class HundGun_VRController : MonoBehaviour {
 
-    public HandRole UsingController = HandRole.LeftHand;
+    public SteamVR_ControllerManager manager;
     public GameObject GunObject;
 
 	// Use this for initialization
@@ -15,6 +15,10 @@ public class HundGun_VRController : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        GunObject.GetComponent<GunState>().SetTriggerWeight(ViveInput.GetTriggerValue(UsingController));        
+        SteamVR_TrackedObject trackedObj = manager.right.GetComponent<SteamVR_TrackedObject>();
+        SteamVR_Controller.Device rightDevice = SteamVR_Controller.Input((int)trackedObj.index);
+        var value = rightDevice.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
+        Debug.Log(value);
+        GunObject.GetComponent<GunState>().SetTriggerWeight(value);        
 	}
 }
