@@ -7,6 +7,7 @@ public class HundGun_VRController : MonoBehaviour {
 
     public SteamVR_ControllerManager manager;
     public GameObject GunObject;
+	public GameObject m_RazerPrefab;
 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +20,16 @@ public class HundGun_VRController : MonoBehaviour {
         SteamVR_Controller.Device rightDevice = SteamVR_Controller.Input((int)trackedObj.index);
         var value = rightDevice.GetAxis(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger).x;
         Debug.Log(value);
-        GunObject.GetComponent<GunState>().SetTriggerWeight(value);        
+        GunObject.GetComponent<GunState>().SetTriggerWeight(value);     
+		
+		if(rightDevice.GetPressDown(Valve.VR.EVRButtonId.k_EButton_Grip))
+		{
+			GunObject.GetComponent<GunState>().EjectMagazine();
+		}
+		if (rightDevice.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
+		{
+			GameObject obj = Instantiate(m_RazerPrefab);
+			obj.GetComponent<LaserScript>().Firing(GunObject.GetComponent<GunState>().BulletCorePoint);
+		}
 	}
 }

@@ -18,7 +18,7 @@ public class Magazine : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		
+		this.transform.localRotation = Quaternion.identity;
 	}
 
     public int GetBulletNum()
