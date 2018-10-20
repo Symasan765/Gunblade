@@ -23,7 +23,8 @@ GameObject:
   - component: {fileID: 23613798296503238}
   - component: {fileID: 54454171996918894}
   - component: {fileID: 114025858681881270}
-  m_Layer: 0
+  - component: {fileID: 65562912193147814}
+  m_Layer: 10
   m_Name: Beam
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +100,19 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
+--- !u!65 &65562912193147814
+BoxCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1060994431873004}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114025858681881270
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,4 +125,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_EffectPrefab: {fileID: 1000011945391522, guid: 78b71003e8b357d4bbf89c8b5e5e4f0e,
+    type: 2}
+  m_ExpPrefab: {fileID: 1000013462590818, guid: ecdd96beb7f93494880c052dfccf9dc1,
+    type: 2}
+  m_AudioPrefab: {fileID: 1682521101558744, guid: dbc13bac9e9e9d541a6bd1687be1103e,
     type: 2}
