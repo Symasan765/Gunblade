@@ -43,12 +43,12 @@ public class WeaponSwitch : MonoBehaviour {
 
 	void WeaponUpdate()
 	{
-		SteamVR_TrackedObject trackedObj = manager.right.GetComponent<SteamVR_TrackedObject>();
-		SteamVR_Controller.Device rightDevice = SteamVR_Controller.Input((int)trackedObj.index);
+		//SteamVR_TrackedObject trackedObj = manager.right.GetComponent<SteamVR_TrackedObject>();
+		//SteamVR_Controller.Device rightDevice = SteamVR_Controller.Input((int)trackedObj.index);
 
 		// 入力を受け付けている
-		//if (Input.GetMouseButton(0))
-		if (rightDevice.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
+		if (Input.GetMouseButton(0))
+		//if (rightDevice.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
 		{
 			m_TimeCnt += Time.deltaTime;
 
