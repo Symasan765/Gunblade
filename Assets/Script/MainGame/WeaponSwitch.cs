@@ -46,23 +46,37 @@ public class WeaponSwitch : MonoBehaviour {
 		SteamVR_TrackedObject trackedObj = manager.right.GetComponent<SteamVR_TrackedObject>();
 		SteamVR_Controller.Device rightDevice = SteamVR_Controller.Input((int)trackedObj.index);
 
-		// 入力を受け付けている
-		//if (Input.GetMouseButton(0))
-		if (rightDevice.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
+		switch (m_NowWeapon)
 		{
-			m_TimeCnt += Time.deltaTime;
+			case WeaponName.Gun:
+				// 入力を受け付けている
+				//if (Input.GetMouseButton(0))
+				if (rightDevice.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
+				{
+					m_TimeCnt += Time.deltaTime;
 
-			// 規定秒数を超えたら武器チェンジ
-			if(m_TimeCnt > m_PushInTime)
-			{
-				SwitchWeapon();
-				m_TimeCnt = -400000.0f;		// 連続で武器が切り替わることを適当に阻止
-			}
-		}
-		else
-		{
-			// 離されている
-			m_TimeCnt = 0.0f;
+					// 規定秒数を超えたら武器チェンジ
+					if (m_TimeCnt > m_PushInTime)
+					{
+						SwitchWeapon();
+						m_TimeCnt = -400000.0f;     // 連続で武器が切り替わることを適当に阻止
+					}
+				}
+				else
+				{
+					// 離されている
+					m_TimeCnt = 0.0f;
+				}
+				break;
+			case WeaponName.Sword:
+				// 入力を離した
+				//if (!Input.GetMouseButton(0))
+				if (rightDevice.GetPressUp(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
+				{
+					SwitchWeapon();
+					m_TimeCnt = 0;
+				}
+					break;
 		}
 	}
 
