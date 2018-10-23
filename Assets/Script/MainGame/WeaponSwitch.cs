@@ -51,7 +51,7 @@ public class WeaponSwitch : MonoBehaviour {
 			case WeaponName.Gun:
 				// 入力を受け付けている
 				//if (Input.GetMouseButton(0))
-				if (rightDevice.GetPressDown(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
+				if (rightDevice.GetPress(Valve.VR.EVRButtonId.k_EButton_SteamVR_Trigger))
 				{
 					m_TimeCnt += Time.deltaTime;
 
