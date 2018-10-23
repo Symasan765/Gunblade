@@ -32,19 +32,21 @@ public class LaserScript : MonoBehaviour
 
 	public void Firing(GameObject gunTransform)
 	{
-		transform.localRotation = gunTransform.transform.localRotation;
-		transform.position = gunTransform.transform.position;
+		//transform.localRotation = gunTransform.transform.localRotation;
+		
 		m_Effect = Instantiate(m_EffectPrefab);
 		m_Effect.transform.localRotation = gunTransform.transform.localRotation;
 		m_Effect.transform.position = gunTransform.transform.position;
 		m_Num = 0;
 		m_GunSE = Instantiate(m_AudioPrefab);
 		m_GunSE.GetComponent<AudioSource>().Play();
+		Destroy(m_GunSE, 1.0f);
 
 		m_TimeCnt = 0.0f;
-		GetComponent<Rigidbody>().AddForce(transform.forward * m_Force);
-
+		GetComponent<Rigidbody>().AddForce(gunTransform.transform.forward * m_Force);
+		this.transform.LookAt(gunTransform.transform.forward);
 		m_Exp = new GameObject[m_MaxExpNum];
+		transform.position = gunTransform.transform.position;
 	}
 
 	void OnTriggerEnter(Collider other)

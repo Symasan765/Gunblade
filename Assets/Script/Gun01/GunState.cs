@@ -89,10 +89,10 @@ public class GunState : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            EjectMagazine();
-        }
+        //if (Input.GetKeyDown(KeyCode.R))
+        //{
+        //    EjectMagazine();
+        //}
         TriggerUpdate();
         SliderUpdate();
     }
@@ -167,6 +167,7 @@ public class GunState : MonoBehaviour
                 if (other.GetComponent<Magazine>().IsEmpty()) return;
                 other.transform.SetParent(MagazinePoint.transform);
                 other.transform.localPosition = Vector3.zero;
+				other.transform.rotation = new Quaternion(0, 0, 0, 1);
                 MagazineObject = other.gameObject;
                 bMagazineExist = true;
                 iBulletLeft = MagazineObject.GetComponent<Magazine>().GetBulletNum();
