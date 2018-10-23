@@ -152,6 +152,10 @@ public class GunState : MonoBehaviour
         }
     }
 
+	public bool GunShotState()
+	{
+		return bShot;
+	}
 
     /// <summary>
     /// 当たり判定～～～

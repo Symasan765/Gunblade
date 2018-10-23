@@ -31,5 +31,12 @@ public class HundGun_VRController : MonoBehaviour {
 			GameObject obj = Instantiate(m_RazerPrefab);
 			obj.GetComponent<LaserScript>().Firing(GunObject.GetComponent<GunState>().BulletCorePoint);
 		}
+
+		if(GunObject.GetComponent<GunState>().bShot)
+		{
+			rightDevice.TriggerHapticPulse(1500);
+			
+		}
+
 	}
 }
