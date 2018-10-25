@@ -9,9 +9,12 @@ public class HundGun_VRController : MonoBehaviour {
     public GameObject GunObject;
 	public GameObject m_RazerPrefab;
 
+    //
+    private float stackTime;
+
 	// Use this for initialization
 	void Start () {
-		
+        stackTime = 0;
 	}
 	
 	// Update is called once per frame
@@ -30,13 +33,16 @@ public class HundGun_VRController : MonoBehaviour {
 		{
 			GameObject obj = Instantiate(m_RazerPrefab);
 			obj.GetComponent<LaserScript>().Firing(GunObject.GetComponent<GunState>().BulletCorePoint);
-		}
+            stackTime = 1/*second*/ * 60/*frame*/;
 
-		if(GunObject.GetComponent<GunState>().bShot)
-		{
-			rightDevice.TriggerHapticPulse(1500);
-			
-		}
+        }
 
-	}
+        if(stackTime > 0)
+        {
+            rightDevice.TriggerHapticPulse(2000);
+            --stackTime;
+        }
+
+
+    }
 }
