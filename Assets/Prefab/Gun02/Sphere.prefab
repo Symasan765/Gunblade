@@ -296,9 +296,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77183d14fcb7c064999721b994c74f3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.1
+  Speed: 2
   TrailOffset: -0.1
-  LifeTime: 1
+  LifeTime: 2
   TrailScale:
     serializedVersion: 2
     m_Curve:
