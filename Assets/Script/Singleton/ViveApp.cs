@@ -4,26 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.XR;
 
-public class ViveApp : SingletonMonoBehaviour<ViveApp>
+public class ViveApp : MonoBehaviour
 {
 	public bool m_ViveConnectionStatus = false;
+	public SteamVR_ControllerManager manager;
 
 	// Use this for initialization
 	void Start()
 	{
-		//もしマネージャーシーン以外でカメラリグが作成されていたら消して早期return
-		if (SceneManager.GetActiveScene().buildIndex != 0)
-		{
-			Debug.Log("マネージャーシーン以外(" + SceneManager.GetActiveScene().name + ")にCameraRigが設置されていたので消しました。");
-			//Destroy(gameObject);
-			return;
-		}
+		// Init();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
-
 	}
 
 	public void Init()
@@ -37,7 +31,5 @@ public class ViveApp : SingletonMonoBehaviour<ViveApp>
 		{
 			m_ViveConnectionStatus = true;
 		}
-
-		ViveCtrl.Get.Init(gameObject.GetComponent<SteamVR_ControllerManager>());
 	}
 }

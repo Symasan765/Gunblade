@@ -1,9 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 {
+	GameObject originObj;
 	SteamVR_ControllerManager manager;
 	SteamVR_TrackedObject rightTrackedObj;
 	SteamVR_TrackedObject leftTrackedObj;
@@ -12,6 +14,8 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 	SteamVR_Controller.Device leftDevice;
 
 	bool m_ConnectFlag;
+	bool m_SceneFlag = false;
+	bool m_GameInitFlag = false;
 
 	public enum ViveDeviceType
 	{
@@ -27,6 +31,28 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 		ApplicationMenu = 3,
 		Grip = 4,
 		MAX_NUM = 5
+	}
+
+	public enum ViveInputCode
+	{
+		k_System = 0,
+		k_ApplicationMenu = 1,
+		k_Grip = 2,
+		k_DPad_Left = 3,
+		k_DPad_Up = 4,
+		k_DPad_Right = 5,
+		k_DPad_Down = 6,
+		k_A = 7,
+		k_ProximitySensor = 31,
+		k_Axis0 = 32,
+		k_Axis1 = 33,
+		k_Axis2 = 34,
+		k_Axis3 = 35,
+		k_Axis4 = 36,
+		k_SteamVR_Touchpad = 32,
+		k_SteamVR_Trigger = 33,
+		k_Dashboard_Back = 2,
+		k_Max = 64,
 	}
 
 	public enum ViveAnalog
@@ -50,11 +76,12 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 
 	public bool Press(ViveDeviceType hand,ViveKey code)
 	{
+		ViveUpdate();
 		switch (hand)
 		{
-			case ViveDeviceType.RightHand:
-				return m_LeftPress[(int)code];
 			case ViveDeviceType.LeftHand:
+				return m_LeftPress[(int)code];
+			case ViveDeviceType.RightHand:
 				return m_RightPress[(int)code];
 		}
 
@@ -64,12 +91,13 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 
 	public bool Trigger(ViveDeviceType hand, ViveKey code)
 	{
+		ViveUpdate();
 		switch (hand)
 		{
 			case ViveDeviceType.RightHand:
-				return m_LeftDown[(int)code];
-			case ViveDeviceType.LeftHand:
 				return m_RightDown[(int)code];
+			case ViveDeviceType.LeftHand:
+				return m_LeftDown[(int)code];
 		}
 
 		Debug.Log("何か入力機能がうまくいってないよ");
@@ -78,11 +106,12 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 
 	public bool Release(ViveDeviceType hand, ViveKey code)
 	{
+		ViveUpdate();
 		switch (hand)
 		{
-			case ViveDeviceType.RightHand:
-				return m_LeftUp[(int)code];
 			case ViveDeviceType.LeftHand:
+				return m_LeftUp[(int)code];
+			case ViveDeviceType.RightHand:
 				return m_RightUp[(int)code];
 		}
 
@@ -92,9 +121,10 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 
 	public Vector2 AnalogValu(ViveDeviceType hand, ViveAnalog code)
 	{
+		ViveUpdate();
 		switch (hand)
 		{
-			case ViveDeviceType.RightHand:
+			case ViveDeviceType.LeftHand:
 				{
 					if (code == ViveAnalog.Touchpad)
 						return m_LeftTouchpad;
@@ -102,7 +132,7 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 						return m_LeftTrigger;
 				}
 				break;
-			case ViveDeviceType.LeftHand:
+			case ViveDeviceType.RightHand:
 				{
 					if (code == ViveAnalog.Touchpad)
 						return m_RightTouchpad;
@@ -118,34 +148,14 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 
 	// Update is called once per frame
 	void Update () {
-		KeyInit();
-
-
-		// Viveがつながっている時の接続
-		if (m_ConnectFlag)
+		m_ConnectFlag = false;
+		if(m_GameInitFlag == false)
 		{
-			ViveUpdate();
-		}
-		// Viveがつながっていない時の接続
-		else
-		{
-
+			SceneManager.activeSceneChanged += OnActiveSceneChanged;
+			m_GameInitFlag = true;
 		}
 	}
-
-	public void Init(SteamVR_ControllerManager man)
-	{
-		manager = man;
-		rightTrackedObj = manager.right.GetComponent<SteamVR_TrackedObject>();
-		leftTrackedObj = manager.left.GetComponent<SteamVR_TrackedObject>();
-		rightDevice = SteamVR_Controller.Input((int)rightTrackedObj.index);
-		leftDevice = SteamVR_Controller.Input((int)leftTrackedObj.index);
-		m_ConnectFlag = ViveApp.Get.m_ViveConnectionStatus;
-		if (m_ConnectFlag)
-		{
-			Debug.Log("Viveがつながったな");
-		}
-	}
+	
 
 	public SteamVR_Controller.Device GetDevice(ViveDeviceType ctrlType)
 	{
@@ -161,8 +171,14 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 
 	void ViveUpdate()
 	{
-		LeftHandUpdate();
-		RightHandUpdate();
+		SceneUpdate();      // シーンで初めて呼ばれる場合はここに来る
+		if (m_ConnectFlag == false)
+		{
+			KeyInit();			// そのフレームで初めて呼ばれる場合はここに来る
+			LeftHandUpdate();
+			RightHandUpdate();
+			m_ConnectFlag = true;
+		}
 	}
 
 		void LeftHandUpdate()
@@ -322,5 +338,34 @@ public class ViveCtrl : SingletonMonoBehaviour<ViveCtrl>
 			m_RightPress[i] = false;
 			m_RightUp[i] = false;
 		}
+	}
+
+	public SteamVR_Controller.Device UseController(ViveDeviceType _side)
+	{
+		manager = originObj.GetComponent<SteamVR_ControllerManager>();
+
+		if (_side == ViveDeviceType.RightHand)
+			return SteamVR_Controller.Input((int)manager.right.GetComponent<SteamVR_TrackedObject>().index);
+		if (_side == ViveDeviceType.LeftHand)
+			return SteamVR_Controller.Input((int)manager.left.GetComponent<SteamVR_TrackedObject>().index);
+		return null;
+	}
+
+	void SceneUpdate()
+	{
+		if(m_SceneFlag == false)
+		{
+			originObj = GameObject.Find("[CameraRig]");
+			manager = originObj.GetComponent<SteamVR_ControllerManager>();
+			rightDevice = SteamVR_Controller.Input((int)manager.right.GetComponent<SteamVR_TrackedObject>().index);
+			leftDevice = SteamVR_Controller.Input((int)manager.left.GetComponent<SteamVR_TrackedObject>().index);
+			m_SceneFlag = true;
+		}
+	}
+
+
+	void OnActiveSceneChanged(Scene prevScene, Scene nextScene)
+	{
+		m_SceneFlag = false;
 	}
 }

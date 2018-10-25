@@ -26,7 +26,7 @@ public class HundGun_VRController : MonoBehaviour {
 		{
 			GunObject.GetComponent<GunState>().EjectMagazine();
 		}
-		if (ViveCtrl.Get.Press(ViveCtrl.ViveDeviceType.RightHand,ViveCtrl.ViveKey.Trigger))
+		if (ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.RightHand,ViveCtrl.ViveKey.Trigger))
 		{
 			GameObject obj = Instantiate(m_RazerPrefab);
 			obj.GetComponent<LaserScript>().Firing(GunObject.GetComponent<GunState>().BulletCorePoint);
