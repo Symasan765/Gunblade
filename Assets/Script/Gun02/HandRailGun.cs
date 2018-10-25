@@ -13,20 +13,31 @@ public class HandRailGun : MonoBehaviour {
 
     //
     private AudioSource audioSource;
+    private bool bIsShot = false;
 
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
         audioSource = this.GetComponent<AudioSource>();
-	}
+        bIsShot = false;
+    }
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space))
+		if(ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.RightHand, ViveCtrl.ViveKey.Trigger))
         {
-            OneShot();
+            if (!bIsShot)
+            {
+                bIsShot = true;
+                OneShot();
+            }
         }
-	}
+        if( ViveCtrl.Get.AnalogValu(ViveCtrl.ViveDeviceType.RightHand, ViveCtrl.ViveAnalog.Trigger).x == 0)
+        {
+            bIsShot = false;
+        }
+    }
 
     public void OneShot()
     {
@@ -39,7 +50,9 @@ public class HandRailGun : MonoBehaviour {
         // Do Shot
         if(BulletObject)
         {
-            var go = GameObject.Instantiate(BulletObject, MuzzlePoint.transform);
+            var go = GameObject.Instantiate(BulletObject);
+            go.transform.position = MuzzlePoint.transform.position;
+            go.transform.rotation = MuzzlePoint.transform.rotation;
         }
 
         audioSource.PlayOneShot(audioSource.clip);
