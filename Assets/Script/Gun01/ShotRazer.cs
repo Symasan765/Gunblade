@@ -19,7 +19,7 @@ public class ShotRazer : MonoBehaviour {
 		if (timeCnt / 0.3f >= 1.0f)
 		{
 			GameObject obj = Instantiate(m_RazerPrefab);
-			obj.GetComponent<LaserScript>().Firing(gameObject);
+			//obj.GetComponent<LaserScript>().Firing(gameObject);
 			timeCnt = 0.0f;
 		}
 	}

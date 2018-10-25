@@ -8,13 +8,15 @@ public class HundGun_VRController : MonoBehaviour {
     public SteamVR_ControllerManager manager;
     public GameObject GunObject;
 	public GameObject m_RazerPrefab;
-
+	MainPlayer m_Player;
     //
     private float stackTime;
 
 	// Use this for initialization
 	void Start () {
         stackTime = 0;
+		m_Player = transform.root.GetComponent<MainPlayer>();
+		Debug.Log(m_Player);
 	}
 	
 	// Update is called once per frame
@@ -32,7 +34,7 @@ public class HundGun_VRController : MonoBehaviour {
 		if (ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.RightHand,ViveCtrl.ViveKey.Trigger))
 		{
 			GameObject obj = Instantiate(m_RazerPrefab);
-			obj.GetComponent<LaserScript>().Firing(GunObject.GetComponent<GunState>().BulletCorePoint);
+			obj.GetComponent<LaserScript>().Firing(GunObject.GetComponent<GunState>().BulletCorePoint, m_Player,MainPlayer.HandData.Right);
             stackTime = 1/*second*/ * 60/*frame*/;
 
         }

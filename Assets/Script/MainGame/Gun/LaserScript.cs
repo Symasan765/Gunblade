@@ -13,6 +13,8 @@ public class LaserScript : MonoBehaviour
 	public GameObject m_AudioPrefab;
 	GameObject[] m_Exp;
 	GameObject m_GunSE;
+	MainPlayer m_Player;
+	MainPlayer.HandData m_HandVec;
 
 	const int m_MaxExpNum = 10;
 	int m_Num;
@@ -30,7 +32,7 @@ public class LaserScript : MonoBehaviour
 		}
 	}
 
-	public void Firing(GameObject gunTransform)
+	public void Firing(GameObject gunTransform, MainPlayer player,MainPlayer.HandData hand)
 	{
 		//transform.localRotation = gunTransform.transform.localRotation;
 		
@@ -47,6 +49,10 @@ public class LaserScript : MonoBehaviour
 		this.transform.LookAt(gunTransform.transform.forward);
 		m_Exp = new GameObject[m_MaxExpNum];
 		transform.position = gunTransform.transform.position;
+		m_Player = player;
+		if (m_Player == null)
+			Debug.Log("弾のスクリプトでプレイヤーがいないぞ");
+		m_HandVec = hand;
 	}
 
 	void OnTriggerEnter(Collider other)
@@ -56,6 +62,8 @@ public class LaserScript : MonoBehaviour
 			m_Exp[m_Num] = Instantiate(m_ExpPrefab);
 			m_Exp[m_Num].transform.position = other.gameObject.transform.position;
 			Destroy(m_Exp[m_Num], 1.5f);
+			m_Player.SetEnemyObj(m_HandVec, other.gameObject);
+			m_Player.SetEnemyObj(MainPlayer.HandData.Left, other.gameObject);
 			m_Num++;
 		}
 	}

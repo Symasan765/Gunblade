@@ -9,6 +9,8 @@ public class WeaponSwitch : MonoBehaviour {
 
 	public SteamVR_ControllerManager manager;
 
+	MainPlayer m_Player;
+
 	GameObject m_GunObj;
 	GameObject m_SwordObj;
 	float m_TimeCnt;
@@ -34,6 +36,8 @@ public class WeaponSwitch : MonoBehaviour {
 		if (m_SwordObj == null)
 			Debug.Log("Swordオブジェクトがおらんぞ");
 		m_SwordObj.SetActive(false);
+
+		m_Player = GameObject.Find("[CameraRig]").GetComponent<MainPlayer>();
 	}
 	
 	// Update is called once per frame
@@ -92,7 +96,7 @@ public class WeaponSwitch : MonoBehaviour {
 
 				m_GunObj.SetActive(false);
 				m_SwordObj.SetActive(true);
-
+				m_Player.Proximity(MainPlayer.HandData.Right);
 				m_NowWeapon = WeaponName.Sword;
 				break;
 			case WeaponName.Sword:
@@ -102,6 +106,7 @@ public class WeaponSwitch : MonoBehaviour {
 				Destroy(fire, 3.0f);
 				m_GunObj.SetActive(true);
 				m_SwordObj.SetActive(false);
+				m_Player.LongDistance();
 				m_NowWeapon = WeaponName.Gun;
 				break;
 		}
