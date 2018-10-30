@@ -90,6 +90,11 @@ public class MainPlayer : MonoBehaviour
 				break;
 		}
 
+		Vector3 interpolation = transform.position - m_MovePos;
+		interpolation = interpolation.normalized * 1.5f;
+		m_MovePos += interpolation;
+		interpolation.y = 0.0f;
+
 		m_LeavePos = gameObject.transform.position;
 		m_Trans = PlayerTrans.Translate;
 	}

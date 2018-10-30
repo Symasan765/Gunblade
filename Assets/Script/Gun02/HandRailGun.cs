@@ -25,7 +25,7 @@ public class HandRailGun : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.RightHand, ViveCtrl.ViveKey.Trigger))
+		if(ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.LeftHand, ViveCtrl.ViveKey.Trigger))
         {
             if (!bIsShot)
             {
@@ -33,7 +33,7 @@ public class HandRailGun : MonoBehaviour {
                 OneShot();
             }
         }
-        if( ViveCtrl.Get.AnalogValu(ViveCtrl.ViveDeviceType.RightHand, ViveCtrl.ViveAnalog.Trigger).x == 0)
+        if( ViveCtrl.Get.AnalogValu(ViveCtrl.ViveDeviceType.LeftHand, ViveCtrl.ViveAnalog.Trigger).x == 0)
         {
             bIsShot = false;
         }
