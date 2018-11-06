@@ -42,7 +42,7 @@ public class SwordScript : MonoBehaviour {
 		m_TipPos[1] = m_TipPos[0];
 
 		m_TipPos[0] = m_Tip.transform.position;
-		m_RootPos[1] = m_Root.transform.position;
+		m_RootPos[0] = m_Root.transform.position;
 
 		Vector3 TipVelocity = m_TipPos[1] - m_TipPos[0];
 		Vector3 RootVelocity = m_RootPos[1] - m_RootPos[0];
@@ -50,7 +50,7 @@ public class SwordScript : MonoBehaviour {
 		// 先端を大きく動かしていて根本を動かしていなければ突きフラグを建てておく
 		if(TipVelocity.magnitude > 0.5f)
 		{
-			if(RootVelocity.magnitude < 0.2f)
+			if(RootVelocity.magnitude < 0.05f)
 			{
 				m_ThrustFlag = true;
 			}
@@ -61,10 +61,12 @@ public class SwordScript : MonoBehaviour {
 
 	private void OnTriggerStay(Collider collider)
 	{
+        Debug.Log("hello");
 		// 3D同士が接触している間、常に呼び出される処理
 		if (m_ThrustFlag)
 		{
-			Thrust(collider.gameObject);
+            Debug.Log("world");
+            Thrust(collider.gameObject);
 		}
 	}
 

@@ -16,15 +16,23 @@ public class EnemyBaseAI : MonoBehaviour {
     //
     public EEnemyState state = EEnemyState.E_Idle;
     public float gravity = 10.0f;
+    public GameObject PlayerObject;
+    public float rotationSpeed = 1.0f;
+    public float rotationStep = 10.0f;
+    public Transform to;
 
     //
     protected CharacterController characterController;
     protected Animator animator;
 
+    //
+
 	// Use this for initialization
 	void Start () {
         characterController = this.GetComponent<CharacterController>();
         animator = this.GetComponent<Animator>();
+        to = this.transform;
+        
 	}
 	
 	// Update is called once per frame
@@ -32,7 +40,14 @@ public class EnemyBaseAI : MonoBehaviour {
         Vector3 moveDirection = Vector3.zero;
         if(characterController.isGrounded)
         {
+            Vector3 vPlayer = PlayerObject.transform.position;
+            vPlayer.y = 0;
+            // this.transform.LookAt(vPlayer);
+            to.LookAt(vPlayer);
 
+            float step = rotationSpeed * Time.deltaTime;
+            Quaternion rotation = Quaternion.RotateTowards(this.transform.rotation, to.rotation, rotationStep);
+            this.transform.rotation = rotation;
         }
         else
         {

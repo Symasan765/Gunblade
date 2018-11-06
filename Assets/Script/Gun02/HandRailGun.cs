@@ -10,6 +10,8 @@ public class HandRailGun : MonoBehaviour {
     public ParticleSystem[] OnceParticle;
     [Header("GuidPivots")]
     public Transform MuzzlePoint;
+    [Header("SteamVR_Option")]
+    public ViveCtrl.ViveDeviceType UsingControllerSide = ViveCtrl.ViveDeviceType.LeftHand;
 
     //
     private AudioSource audioSource;
@@ -25,7 +27,7 @@ public class HandRailGun : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.LeftHand, ViveCtrl.ViveKey.Trigger))
+		if(ViveCtrl.Get.Trigger(UsingControllerSide, ViveCtrl.ViveKey.Trigger))
         {
             if (!bIsShot)
             {
@@ -33,7 +35,7 @@ public class HandRailGun : MonoBehaviour {
                 OneShot();
             }
         }
-        if( ViveCtrl.Get.AnalogValu(ViveCtrl.ViveDeviceType.LeftHand, ViveCtrl.ViveAnalog.Trigger).x == 0)
+        if( ViveCtrl.Get.AnalogValu(UsingControllerSide, ViveCtrl.ViveAnalog.Trigger).x == 0)
         {
             bIsShot = false;
         }
