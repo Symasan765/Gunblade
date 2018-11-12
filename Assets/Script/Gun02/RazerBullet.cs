@@ -44,7 +44,7 @@ public class RazerBullet : MonoBehaviour {
             _getTime = Mathf.Clamp01(_getTime + Time.deltaTime);
             Vector3 _trailScale = new Vector3(TrailScale.Evaluate(_getTime), _trailLength * 5, TrailScale.Evaluate(_getTime));
 
-            LightningStartPointObject.transform.position = this.transform.position - FrontVector * _trailLength * 3;
+            // LightningStartPointObject.transform.position = this.transform.position - FrontVector * _trailLength * 3;
 
             TrailCylinderObject.transform.position = (this.transform.position + SpawnPoint) / 2.0f;
             TrailCylinderObject.transform.localScale = _trailScale;
