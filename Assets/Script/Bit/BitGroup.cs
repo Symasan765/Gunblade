@@ -28,7 +28,7 @@ public class BitGroup : MonoBehaviour
     // Update is called once per frame
     void Update ()
     {
-        SetBitPoint();
+        // SetBitPoint();
         LookTargetByBits();
     }
 
@@ -49,7 +49,7 @@ public class BitGroup : MonoBehaviour
             Gizmos.DrawRay(HeadDevice.transform.position, HeadDevice.transform.forward * hit.distance);
             // Gizmos.DrawWireSphere(HeadDevice.transform.position + HeadDevice.transform.forward * (hit.distance), radius);
 
-            resV3 = HeadDevice.transform.forward * hit.distance;
+            resV3 = hit.point;
         }
         else
         {
@@ -69,10 +69,11 @@ public class BitGroup : MonoBehaviour
         MoveWeight += Time.deltaTime * BitMoveSpeed / 100.0f;
         if (MoveWeight > 1) MoveWeight -= 1.0f;
         if (MoveWeight < 0) MoveWeight += 1.0f;
-        float rot =  50.0f * RangeCurve.Evaluate( MoveWeight ) + 110.0f;
+        float rot = 130;// 360.0f * RangeCurve.Evaluate( MoveWeight ) + 0.0f;
 
         for ( int i = 0; i < BitObjects.Length; i++ )
         {
+            if (BitObjects[i].GetComponent<Bit>().IsShooting()) continue;
             Anchor.Rotate(Anchor.forward, rot);
             Anchor.Rotate(Anchor.up     , rot);
             resV3 = Anchor.up * 4;
@@ -85,6 +86,7 @@ public class BitGroup : MonoBehaviour
     {
         for ( int i = 0; i < BitObjects.Length; i++ )
         {
+            if (BitObjects[i].GetComponent<Bit>().IsShooting()) continue;
             BitObjects[i].transform.LookAt(v3Target);
         }
     }

@@ -10,16 +10,24 @@ public class Bit : MonoBehaviour {
     public float OpenSpeed = 1.0f;
     public float OpenDistance = 30.0f;
     public float AutoCloseTime = 2.0f;
+    public float MoveDelay = 0.0f;
+    public float LocalMoveSpeed;
+    public float LocalMoveRange;
+
+    public AnimationCurve LocalCurve1;
+    public AnimationCurve LocalCurve2;
+
 
     public GameObject Bullet;
 
     //
     private float OpenWeight = 0.0f;
-    public bool bIsBitOpen = false;
+    private bool bIsBitOpen = false;
     private bool bIsBitOpened = false;
     private Transform ImageTransform;
     private float OpenLife = 0.0f;
     private int ShotStack = 0;
+    private float LocalMoveWeight;
 
 	// Use this for initialization
 	void Start () {
@@ -30,7 +38,7 @@ public class Bit : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        CalcLocalMoveWeight();
 
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -38,6 +46,8 @@ public class Bit : MonoBehaviour {
         }
         BitOpener();
         InstanceBullet();
+
+        MoveLocalFloat();
     }
 
     void BitOpener()
@@ -93,5 +103,29 @@ public class Bit : MonoBehaviour {
             ShotStack -= 1;
             var go = Instantiate(Bullet, this.transform.position, this.transform.rotation);
         }
+    }
+
+    public bool IsShooting()
+    {
+        return bIsBitOpen;
+    }
+
+    void CalcLocalMoveWeight()
+    {
+        if (bIsBitOpen) return;
+        LocalMoveWeight += Time.deltaTime * LocalMoveSpeed / 100.0f;
+        if (LocalMoveWeight > 1) LocalMoveWeight -= 1.0f;
+        if (LocalMoveWeight < 0) LocalMoveWeight += 1.0f;
+    }
+
+    void MoveLocalFloat()
+    {
+        float v = LocalCurve1.Evaluate(LocalMoveWeight);
+        float h = LocalCurve2.Evaluate(LocalMoveWeight);
+        Vector3 newpos;
+        newpos.x = LocalMoveRange * h;
+        newpos.y = LocalMoveRange * v;
+        newpos.z = 0;
+        this.transform.localPosition = newpos;
     }
 }
