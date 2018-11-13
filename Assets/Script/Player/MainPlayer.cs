@@ -14,6 +14,12 @@ public class MainPlayer : MonoBehaviour
 	GameObject m_CameraObj; // プレイヤーの視点となるカメラオブジェクト
 	float m_TransCnt;
 
+	public float m_MaxHitPoint = 100.0f;
+	float m_HitPoint = 0;
+
+	public DamagedCamera m_DamageCamera;
+	public float m_DamageSec = 1.0f;
+
 	public enum HandData
 	{
 		Right,
@@ -41,6 +47,10 @@ public class MainPlayer : MonoBehaviour
 		m_EnemyObjs[1] = gameObject;
 
 		m_Trans = PlayerTrans.Attack;
+
+		m_HitPoint = m_MaxHitPoint;
+
+		m_DamageCamera.m_DamageProductionSec = m_DamageSec;
 	}
 
 	// Update is called once per frame
@@ -55,6 +65,9 @@ public class MainPlayer : MonoBehaviour
 				Translate();
 				break;
 		}
+
+		if (Input.GetKeyDown(KeyCode.P))
+			IsDamage(0.5f);
 	}
 
 		/// <summary>
@@ -124,5 +137,10 @@ public class MainPlayer : MonoBehaviour
 			//m_CameraObj.transform.position = m_MovePos;
 			m_Trans = PlayerTrans.Attack;
 		}
+	}
+
+	public void IsDamage(float damageValue)
+	{
+		m_DamageCamera.Damage();
 	}
 }
