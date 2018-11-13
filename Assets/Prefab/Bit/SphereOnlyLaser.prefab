@@ -42,7 +42,7 @@ GameObject:
   - component: {fileID: 114473613265642230}
   - component: {fileID: 54680456313242456}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: SphereOnlyLaser
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

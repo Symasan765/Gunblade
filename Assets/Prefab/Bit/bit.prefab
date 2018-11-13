@@ -19,7 +19,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4840697872301514}
-  - component: {fileID: 114553074990006126}
   - component: {fileID: 114063846300718290}
   m_Layer: 0
   m_Name: bit
@@ -40,21 +39,6 @@ GameObject:
   - component: {fileID: 23213810929216996}
   m_Layer: 0
   m_Name: Cube.002
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1263923643855854
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4250010588204030}
-  m_Layer: 0
-  m_Name: Anchor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -139,19 +123,6 @@ Transform:
   m_Father: {fileID: 4840697872301514}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!4 &4250010588204030
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1263923643855854}
-  m_LocalRotation: {x: -0, y: -0, z: 0.38268346, w: -0.92387956}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4840697872301514}
-  m_RootOrder: 5
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4367565720417484
 Transform:
   m_ObjectHideFlags: 1
@@ -206,7 +177,6 @@ Transform:
   - {fileID: 4367565720417484}
   - {fileID: 4892136752479618}
   - {fileID: 4531864943343278}
-  - {fileID: 4250010588204030}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -410,26 +380,6 @@ MonoBehaviour:
   MoveAnchor: {fileID: 1576045774223292}
   OpenSpeed: 10
   OpenDistance: 0.1
+  AutoCloseTime: 2
   Bullet: {fileID: 1765717350140132, guid: 7006d35328c9b8b4589f130ea5c11b7d, type: 2}
-  bIsBitOpen: 0
---- !u!114 &114553074990006126
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1004957112126554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ea98f5a7601fe54b87c12590d3dc09c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  BitObject:
-  - {fileID: 1807279151308888}
-  - {fileID: 1270336508347454}
-  - {fileID: 1728482836899340}
-  - {fileID: 1188134848160130}
-  MoveAnchor: {fileID: 1263923643855854}
-  OpenSpeed: 1
-  OpenDistance: 1
-  Bullet: {fileID: 0}
   bIsBitOpen: 0
