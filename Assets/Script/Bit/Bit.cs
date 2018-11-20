@@ -27,10 +27,11 @@ public class Bit : MonoBehaviour {
     private Transform ImageTransform;
     private float OpenLife = 0.0f;
     private int ShotStack = 0;
-    private float LocalMoveWeight;
+    public float LocalMoveWeight;
+    public float GlobalMoveWeight;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         ImageTransform = MoveAnchor.transform;
         ShotStack = 0;
 
@@ -40,10 +41,10 @@ public class Bit : MonoBehaviour {
 	void Update () {
         CalcLocalMoveWeight();
 
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Shot();
-        }
+        //if(Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    Shot();
+        //}
         BitOpener();
         InstanceBullet();
 
@@ -82,7 +83,7 @@ public class Bit : MonoBehaviour {
         }
     }
 
-    void Shot()
+    public void Shot()
     {
         OpenLife = AutoCloseTime;
         ShotStack += 1;
@@ -116,6 +117,15 @@ public class Bit : MonoBehaviour {
         LocalMoveWeight += Time.deltaTime * LocalMoveSpeed / 100.0f;
         if (LocalMoveWeight > 1) LocalMoveWeight -= 1.0f;
         if (LocalMoveWeight < 0) LocalMoveWeight += 1.0f;
+
+        GlobalMoveWeight += Time.deltaTime * GlobalMoveWeight / 10000.0f;
+        if (GlobalMoveWeight > 1) GlobalMoveWeight -= 1.0f;
+        if (GlobalMoveWeight < 0) GlobalMoveWeight += 1.0f;
+    }
+
+    public float GetBitWeight()
+    {
+        return GlobalMoveWeight;
     }
 
     void MoveLocalFloat()
