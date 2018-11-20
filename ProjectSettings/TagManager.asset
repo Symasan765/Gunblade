@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - Magazine01
+  - Weapon
   layers:
   - Default
   - TransparentFX
