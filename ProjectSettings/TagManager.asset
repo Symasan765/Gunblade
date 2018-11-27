@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Magazine01
   - Weapon
+  - EnemyAttack
   layers:
   - Default
   - TransparentFX
