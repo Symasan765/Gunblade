@@ -37,4 +37,21 @@ public class FadeScript : MonoBehaviour
 			m_Image.color = new Color(0.0f, 0.0f, 0.0f, 1.0f - t);
 		}
 	}
+
+	public bool SceneTrans()
+	{
+		if(m_FadeInFlag == false)
+		{
+			if(m_TimeCnt == 0.0f)
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public void ChangeFlag(bool flag)
+	{
+		m_FadeInFlag = flag;
+	}
 }
