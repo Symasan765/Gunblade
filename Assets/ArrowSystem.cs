@@ -41,10 +41,12 @@ public class ArrowSystem : MonoBehaviour
         }
 
         ArrowInitialize();
-        UpdateArrow();
 
         LineToDefault();
         UpdateBowLine();
+
+        UpdateArrow();
+
     }
 
     void UpdateBowLine()
@@ -68,6 +70,11 @@ public class ArrowSystem : MonoBehaviour
         shapeModuleB.radius = distB * 0.5f;
 
         GrabPoint.transform.localPosition = new Vector3(0, 0, Mathf.Max( GrabPoint.transform.localPosition.z, MaxGrabPoint ));
+    }
+
+    public void SetGrabPosition(float z)
+    {
+        GrabPoint.transform.localPosition = new Vector3(0, 0, Mathf.Max(z, MaxGrabPoint));
     }
 
     // 弦を離したときに元に戻る挙動

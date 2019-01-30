@@ -8,6 +8,7 @@ TagManager:
   - Weapon
   - EnemyAttack
   - ArrowGrab
+  - Arrow
   layers:
   - Default
   - TransparentFX

@@ -10,6 +10,8 @@ public class ControllerGrabObject : MonoBehaviour
     // 手に持っているオブジェクト
     private GameObject objectInHand;
 
+    public ArrowSystem ArrowSystemScript;
+
     private SteamVR_Controller.Device Controller
     {
         get { return SteamVR_Controller.Input((int)trackedObj.index); }
@@ -121,7 +123,7 @@ public class ControllerGrabObject : MonoBehaviour
                 if (collidingObject.CompareTag("ArrowGrab"))
                 {
                     GrabObject();
-                    objectInHand.GetComponent<ArrowSystem>().Grab();
+                    ArrowSystemScript.Grab();
                 }
             }
         }
@@ -132,14 +134,15 @@ public class ControllerGrabObject : MonoBehaviour
             {
                 if (objectInHand.CompareTag("ArrowGrab"))
                 {
-                    objectInHand.GetComponent<ArrowSystem>().Shot();
+                    ArrowSystemScript.Shot();
                     ReleaseObject();
                 }
             }
         }
-        if (objectInHand)
+
+        if (ArrowSystemScript.Grabing)
         {
-            objectInHand.transform.position = this.transform.position;            
+            ArrowSystemScript.SetGrabPosition( this.transform.position.z );
         }
     }
 }
