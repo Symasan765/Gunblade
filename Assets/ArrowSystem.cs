@@ -102,6 +102,22 @@ public class ArrowSystem : MonoBehaviour
         
     }
 
+    public void Grab()
+    {
+        Grabing = true;
+
+    }
+
+    public void Shot()
+    {
+
+        Grabing = false;
+        ArrowInit = true;
+        GrabArrow.GetComponent<Arrow>().Shot(Mathf.Abs(GrabPoint.transform.localPosition.z) * 1.0f);
+        GrabArrow = null;
+        
+    }
+
 
 
 

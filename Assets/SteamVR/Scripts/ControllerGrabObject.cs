@@ -2,7 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerGrabObject : MonoBehaviour {
+public class ControllerGrabObject : MonoBehaviour
+{
     private SteamVR_TrackedObject trackedObj;
     // コントローラと当たっているオブジェクト
     private GameObject collidingObject;
@@ -69,8 +70,8 @@ public class ControllerGrabObject : MonoBehaviour {
         collidingObject = null;
         // オブジェクトをコントローラにつけるためにジョイントを作り
         // オブジェクトのRigidbodyをジョイントにコピーする
-        var joint = AddFixedJoint();
-        joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
+        //var joint = AddFixedJoint();
+        //joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
 
     }
     // ジョイントを生成する
@@ -117,7 +118,11 @@ public class ControllerGrabObject : MonoBehaviour {
         {
             if (collidingObject)
             {
-                GrabObject();
+                if (collidingObject.CompareTag("ArrowGrab"))
+                {
+                    GrabObject();
+                    objectInHand.GetComponent<ArrowSystem>().Grab();
+                }
             }
         }
         // Triggerを放して手にオブジェクトがあればオブジェクトが放される
@@ -125,10 +130,17 @@ public class ControllerGrabObject : MonoBehaviour {
         {
             if (objectInHand)
             {
-                ReleaseObject();
+                if (objectInHand.CompareTag("ArrowGrab"))
+                {
+                    objectInHand.GetComponent<ArrowSystem>().Shot();
+                    ReleaseObject();
+                }
             }
         }
-
+        if (objectInHand)
+        {
+            objectInHand.transform.position = this.transform.position;            
+        }
     }
 }
 
