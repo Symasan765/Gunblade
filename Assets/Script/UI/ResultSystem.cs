@@ -8,7 +8,6 @@ public class ResultSystem : MonoBehaviour
     public GameObject[] uiObj;
     public GameObject[] rankObj;
     private int index;
-    public AudioSource audioSource;
     private bool nextFlag = false;
     // Start is called before the first frame update
     void Start()
@@ -38,7 +37,6 @@ public class ResultSystem : MonoBehaviour
                 uiObj[i].GetComponent<PointToPlaceNum>().SetColor(color);
                 yield return null;
             }
-            audioSource.PlayOneShot(audioSource.clip);
             yield return new WaitForSeconds(0.5f);
 
             uiObj[i].GetComponent<PointToPlaceNum>().StartDraw(567);
