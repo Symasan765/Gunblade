@@ -11,6 +11,9 @@ public class ResultSystem : MonoBehaviour
     private int index;
     private bool nextFlag = false;
     private ViveCtrl inputMng;
+    public FadeScript fadeScript;
+    public AudioSource audioSource;
+    public string nextScene;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +27,24 @@ public class ResultSystem : MonoBehaviour
     {
         if (!nextFlag) return;
         // 入力で遷移
+        /*
         if (inputMng.Trigger(ViveCtrl.ViveDeviceType.RightHand, ViveCtrl.ViveKey.Trigger))
         {
-            SceneManager.LoadScene("TitleScene");
+            fadeScript.ChangeFlag(false);
+            audioSource.PlayOneShot(audioSource.clip);
+            nextFlag = false;
+        }
+        */
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            fadeScript.ChangeFlag(false);
+            audioSource.PlayOneShot(audioSource.clip);
+            nextFlag = false;
+        }
+
+        if (fadeScript.SceneTrans())
+        {
+            SceneManager.LoadScene(nextScene);
         }
     }
 
