@@ -18,7 +18,6 @@ public class PointToRank : MonoBehaviour
         spriteNum = sprites.Length;
         image = GetComponent<Image>();
         rectTransform = GetComponent<RectTransform>();
-
     }
 
     // Update is called once per frame

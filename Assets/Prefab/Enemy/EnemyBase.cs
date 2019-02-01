@@ -15,11 +15,17 @@ public class EnemyBase : MonoBehaviour
     public GameObject ExplosionEffect;
     public GameObject HitEffect;
 
+    public GameObject ScoreManager;
+    public AudioSource Audio;
+    public AudioClip Clip;
+
 
     // Start is called before the first frame update
-    void Start()
+    public virtual void Start()
     {
-        Destroy(this.gameObject, 30.0f);
+        ScoreManager = GameObject.FindGameObjectWithTag("ScoreSystem");
+        Audio = ScoreManager.GetComponent<AudioSource>();
+        Destroy( this.gameObject, 30.0f );
     }
 
     // Update is called once per frame
@@ -36,7 +42,7 @@ public class EnemyBase : MonoBehaviour
     {
         var go = Instantiate(ExplosionEffect, this.transform.position, Quaternion.identity);
         Destroy(go.gameObject, 5.0f);
-        Destroy(this.gameObject);
+        Destroy(this.gameObject,0.1f);
     }
 
     void OnCollisionEnter(Collision collision)
@@ -44,9 +50,13 @@ public class EnemyBase : MonoBehaviour
         // 死
         if (collision.gameObject.CompareTag("Arrow"))
         {
+            ScoreManager.GetComponent<ScoreManager>().AddScore(Score);
+
             var go = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
             Destroy(go.gameObject, 5.0f);
             HitLife -= 1;
+
+            Audio.PlayOneShot(Clip);
         }
     }
 }

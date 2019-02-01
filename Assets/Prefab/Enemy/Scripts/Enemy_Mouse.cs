@@ -5,8 +5,10 @@ using UnityEngine;
 public class Enemy_Mouse : EnemyBase
 {
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
+
         Destroy(this.gameObject, 30.0f);
     }
 
@@ -24,11 +26,14 @@ public class Enemy_Mouse : EnemyBase
         {
             foreach (ContactPoint point in collision.contacts)
             {
+                ScoreManager.GetComponent<ScoreManager>().AddScore(Score);
                 var go = Instantiate(HitEffect, point.point, Quaternion.identity);
                 Destroy(go.gameObject, 5.0f);
                 break;
             }
             HitLife -= 1;
+            Audio.PlayOneShot(Clip);
+
         }
     }
 
@@ -36,10 +41,13 @@ public class Enemy_Mouse : EnemyBase
     {
         if (other.gameObject.CompareTag("Arrow"))
         {
+            Audio.PlayOneShot(Clip);
+            ScoreManager.GetComponent<ScoreManager>().AddScore(Score);
             var go = Instantiate(HitEffect, other.ClosestPointOnBounds(this.transform.position), Quaternion.identity);
             Destroy(go.gameObject, 5.0f);
 
             HitLife -= 1;
+
         }
     }
 }

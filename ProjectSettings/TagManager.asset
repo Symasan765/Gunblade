@@ -9,6 +9,7 @@ TagManager:
   - EnemyAttack
   - ArrowGrab
   - Arrow
+  - ScoreSystem
   layers:
   - Default
   - TransparentFX

@@ -11,10 +11,11 @@ public class Enemy_Mage : EnemyBase
     float FloatMaxHeight = 1;
 
     // Start is called before the first frame update
-    void Start()
+    public override void Start()
     {
+        base.Start();
         SpawnHeight = this.transform.position.y;
-        Destroy(this.gameObject, 30.0f);
+        //Destroy(this.gameObject, 30.0f);
 
     }
 
@@ -37,9 +38,12 @@ public class Enemy_Mage : EnemyBase
         // 死
         if (collision.gameObject.CompareTag("Arrow"))
         {
+            ScoreManager.GetComponent<ScoreManager>().AddScore(Score);
             var go = Instantiate(HitEffect, this.transform.position, Quaternion.identity);
             Destroy(go.gameObject, 5.0f);
             HitLife -= 1;
+            Audio.PlayOneShot(Clip);
+
         }
     }
 
@@ -47,9 +51,13 @@ public class Enemy_Mage : EnemyBase
     {
         if (other.gameObject.CompareTag("Arrow"))
         {
+            Audio.PlayOneShot(Clip);
+
+            ScoreManager.GetComponent<ScoreManager>().AddScore(Score);
             var go = Instantiate(HitEffect, other.ClosestPointOnBounds(this.transform.position), Quaternion.identity);
             Destroy(go.gameObject, 5.0f);
             HitLife -= 1;
+
         }
     }
 }

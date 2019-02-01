@@ -1434,13 +1434,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 63ec3f5e5bcb1d649bb2acddfd602155, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Score: 500
+  Score: 5000
   ScoreIsTime: 0
   MoveSpeed: 5
   HitLife: 1
   ExplosionEffect: {fileID: 5295932206417246110, guid: 3ef65e07cc41deb41902e7a1a3c5c9ff,
     type: 3}
   HitEffect: {fileID: 1000012909287652, guid: bb497b69b18cbb74f935713d6253fd13, type: 3}
+  ScoreManager: {fileID: 0}
+  Audio: {fileID: 0}
+  Clip: {fileID: 8300000, guid: 3cc1af9f1275ace4dae317fa8e6356b4, type: 3}
 --- !u!96 &4260744232850903327
 TrailRenderer:
   serializedVersion: 2

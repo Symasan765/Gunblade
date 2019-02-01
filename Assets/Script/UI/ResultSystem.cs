@@ -14,38 +14,43 @@ public class ResultSystem : MonoBehaviour
     public FadeScript fadeScript;
     public AudioSource audioSource;
     public string nextScene;
+    private int score;
     // Start is called before the first frame update
     void Start()
     {
         StartCoroutine("ResultPointDisplay");
         index = 0;
         inputMng = GameObject.FindObjectOfType<ViveCtrl>();
+        score = GameObject.FindGameObjectWithTag("ScoreSystem").GetComponent<ScoreManager>().GetScore();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (fadeScript.SceneTrans())
+        {
+            SceneManager.LoadScene(nextScene);
+        }
         if (!nextFlag) return;
         // 入力で遷移
-        /*
+        
         if (inputMng.Trigger(ViveCtrl.ViveDeviceType.RightHand, ViveCtrl.ViveKey.Trigger))
         {
             fadeScript.ChangeFlag(false);
             audioSource.PlayOneShot(audioSource.clip);
             nextFlag = false;
         }
-        */
+        /*
         if (Input.GetKeyDown(KeyCode.Space))
         {
             fadeScript.ChangeFlag(false);
             audioSource.PlayOneShot(audioSource.clip);
             nextFlag = false;
         }
+        */
 
-        if (fadeScript.SceneTrans())
-        {
-            SceneManager.LoadScene(nextScene);
-        }
+
     }
 
     private IEnumerator ResultPointDisplay()
@@ -64,10 +69,10 @@ public class ResultSystem : MonoBehaviour
             }
             yield return new WaitForSeconds(0.5f);
 
-            uiObj[i].GetComponent<PointToPlaceNum>().StartDraw(567);
+            uiObj[i].GetComponent<PointToPlaceNum>().StartDraw(score);
         }
         yield return new WaitForSeconds(2.0f);
-        rankObj[0].GetComponent<PointToRank>().StartDraw(567);
+        rankObj[0].GetComponent<PointToRank>().StartDraw(score);
 
         yield return new WaitForSeconds(2.0f);
 
