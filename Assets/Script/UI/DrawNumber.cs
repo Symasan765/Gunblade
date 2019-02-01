@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DrawNumber : MonoBehaviour
 {
-    private Image image;
+    public Image image;
     public NumberSprite numberSprite;
     // Start is called before the first frame update
     void Start()
