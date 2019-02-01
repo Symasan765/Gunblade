@@ -11,20 +11,29 @@ public class SceneTrans : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-		//if (ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.RightHand,ViveCtrl.ViveKey.Trigger))
+  //      if (ViveCtrl.Get.Trigger(ViveCtrl.ViveDeviceType.RightHand, ViveCtrl.ViveKey.Trigger))
+  //      {
+  //          m_Fade.ChangeFlag(false);
+  //          m_Audio.Play();
+  //      }
+  //      if (Input.GetKeyDown(KeyCode.Space))
 		//{
 		//	m_Fade.ChangeFlag(false);
 		//	m_Audio.Play();
 		//}
-		if (Input.GetKeyDown(KeyCode.Space))
-		{
-			m_Fade.ChangeFlag(false);
-			m_Audio.Play();
-		}
 
 		if (m_Fade.SceneTrans())
 		{
 			UnityEngine.SceneManagement.SceneManager.LoadScene(m_NextScene);
 		}
 	}
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag("Arrow"))
+        {
+            m_Fade.ChangeFlag(false);
+            m_Audio.Play();
+        }
+    }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ControllerGrabObject : MonoBehaviour
+public class TitleHandle : MonoBehaviour
 {
     private SteamVR_TrackedObject trackedObj;
     // コントローラと当たっているオブジェクト
@@ -10,7 +10,7 @@ public class ControllerGrabObject : MonoBehaviour
     // 手に持っているオブジェクト
     private GameObject objectInHand;
 
-    public ArrowSystem ArrowSystemScript;
+    public GameObject ScenetransScript;
 
     private SteamVR_Controller.Device Controller
     {
@@ -91,19 +91,7 @@ public class ControllerGrabObject : MonoBehaviour
     // ========================================
     private void ReleaseObject()
     {
-        // ジョイントがあることを確認する
-        if (GetComponent<FixedJoint>())
-        {
-            // ジョイントについているRigidbodyをnullにしてジョイントを削除する
-            GetComponent<FixedJoint>().connectedBody = null;
-            Destroy(GetComponent<FixedJoint>());
-            // コントローラのスピードと回転スピードをオブジェクトにコピーする
-            // 落ちる挙動に違和感がないように
-            objectInHand.GetComponent<Rigidbody>().velocity =
-            Controller.velocity;
-            objectInHand.GetComponent<Rigidbody>().angularVelocity =
-            Controller.angularVelocity;
-        }
+
         // 手に持っているオブジェクトへの参照をnullにする
         objectInHand = null;
 
@@ -116,34 +104,12 @@ public class ControllerGrabObject : MonoBehaviour
     {
         // Triggerを押されたらコントローラと当たっているオブジェクト
         // (Rigidbody)があればオブジェクトを握る関数を呼び出す
-        if (Controller.GetHairTriggerDown())
-        {
-            if (collidingObject)
-            {
-                if (collidingObject.CompareTag("ArrowGrab"))
-                {
-                    GrabObject();
-                    ArrowSystemScript.Grab();
-                }
-            }
-        }
-        // Triggerを放して手にオブジェクトがあればオブジェクトが放される
-        if (Controller.GetHairTriggerUp())
-        {
-            if (objectInHand)
-            {
-                if (objectInHand.CompareTag("ArrowGrab"))
-                {
-                    ArrowSystemScript.Shot();
-                    ReleaseObject();
-                }
-            }
-        }
+        //if (Controller.GetHairTriggerDown())
+        //{
 
-        if (ArrowSystemScript.Grabing)
-        {
-            ArrowSystemScript.SetGrabPosition( this.transform.position );
-        }
+        //    //ScenetransScript.GetComponent< SceneTrans >().TitleToGame();
+        //}
+
     }
 }
 

@@ -72,9 +72,11 @@ public class ArrowSystem : MonoBehaviour
         GrabPoint.transform.localPosition = new Vector3(-1.14f, GrabPoint.transform.localPosition.y, Mathf.Max( GrabPoint.transform.localPosition.z, MaxGrabPoint ));
     }
 
-    public void SetGrabPosition(float z)
+    public void SetGrabPosition(Vector3 righthandPosition)
     {
-        GrabPoint.transform.localPosition = new Vector3(-1.14f, GrabPoint.transform.localPosition.y, Mathf.Max(z, MaxGrabPoint));
+        Vector3 newpos = righthandPosition - this.transform.position;
+        newpos += this.transform.position;
+        GrabPoint.transform.position = newpos;// = new Vector3(-1.14f, GrabPoint.transform.localPosition.y, Mathf.Max(z, MaxGrabPoint));
     }
 
     // 弦を離したときに元に戻る挙動

@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scene/MatsudaCastle.unity
     guid: 4cc971ae0ea5f9548946803086c702b3
+  - enabled: 1
+    path: Assets/Scene/Demo01.unity
+    guid: aebab382e47618d4fa05c740626f2989
   m_configObjects: {}
